@@ -4,6 +4,12 @@ import { ENV } from "./lib/env.js";
 const app = express();
 const port = process.env.PORT;
 
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        data: "Hello from the server.",
+    });
+})
 app.get("/data", (req, res) => {
     res.status(200).json({
         success: true,
