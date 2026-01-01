@@ -11,12 +11,10 @@ import {
 
 function App() {
   const [data, setData] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(import.meta.env.BASE_URL + "/data");
-        console.log(import.meta.env.BASE_URL);
+        const response = await axios.get(import.meta.env.VITE_BASE_URL + "/data");
         setData(response.data.data);
         console.log("Data fetched from server:", response.data);
       } catch (error) {
@@ -29,6 +27,7 @@ function App() {
 
   return (
     <div>
+      <h1>{url}</h1>
       <h1>Welcome to Binary Project</h1>
       <h2>Data from Server: {data}</h2>
       <SignedOut>
