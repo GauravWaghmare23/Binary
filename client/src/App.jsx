@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 function App() {
   const [data, setData] = useState("");
@@ -8,9 +15,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://binary-3gfc.onrender.com"
-        );
+        const response = await axios.get(import.meta.env.VITE_BASE_URL + "/data");
         setData(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -24,6 +29,15 @@ function App() {
     <div>
       <h1>Welcome to Binary Project</h1>
       <h2>Data from Server: {data}</h2>
+      <SignedOut>
+        <SignInButton mode="modal" />
+      </SignedOut>
+
+      <SignedIn>
+        <SignOutButton />
+      </SignedIn>
+
+      <UserButton />
     </div>
   );
 }
