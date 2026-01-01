@@ -15,8 +15,10 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(import.meta.env.VITE_BASE_URL + "/data");
+        const response = await axios.get(import.meta.env.BASE_URL + "/data");
+        console.log(import.meta.env.BASE_URL);
         setData(response.data.data);
+        console.log("Data fetched from server:", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
