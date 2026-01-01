@@ -27,7 +27,6 @@ function App() {
 
   return (
     <div>
-      <h1>{url}</h1>
       <h1>Welcome to Binary Project</h1>
       <h2>Data from Server: {data}</h2>
       <SignedOut>
