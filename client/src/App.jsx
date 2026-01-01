@@ -11,7 +11,6 @@ function App() {
         const response = await axios.get(
           "https://binary-3gfc.onrender.com"
         );
-        console.log(response.data);
         setData(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);

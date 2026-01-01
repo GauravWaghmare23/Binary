@@ -1,5 +1,5 @@
 node_modules
 .env
 .env_example
-combined_logs
-error_logs
+combined.log
+error.log

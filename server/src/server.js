@@ -2,9 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
+import { logger } from "./utils/logger.js";
+import { connectDB } from "./lib/connect.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
+
 
 app.use(
   cors({
@@ -33,6 +36,15 @@ app.get("/data", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(port, () => {
+            logger.info(`Server is running on port ${port}`);
+        });
+    } catch (error) {
+        logger.error("Failed to start server:", error);
+    }
+}
+
+startServer();
