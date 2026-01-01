@@ -1,0 +1,8 @@
+node_modules
+combined.log
+error.log
+dist
+.env
+.env.local
+client/.env
+client/.env
