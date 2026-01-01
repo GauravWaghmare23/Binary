@@ -1,16 +1,21 @@
 import express from "express";
-import { ENV } from "./lib/env.js";
+import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors";
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://binary-frontend.onrender.com/"],
+    origin: [
+      "http://localhost:5173",
+      "https://binary-frontend.onrender.com", // no trailing slash
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,6 +25,7 @@ app.get("/", (req, res) => {
     data: "Hello from the server.",
   });
 });
+
 app.get("/data", (req, res) => {
   res.status(200).json({
     success: true,
@@ -27,6 +33,6 @@ app.get("/data", (req, res) => {
   });
 });
 
-app.listen(ENV.PORT, () => {
-  console.log(`Server is running on port http://localhost:${ENV.PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
