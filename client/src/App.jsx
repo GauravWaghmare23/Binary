@@ -9,7 +9,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://binary-3gfc.onrender.com/data"
+          "https://binary-3gfc.onrender.com"
         );
         console.log(response.data);
         setData(response.data.data);
