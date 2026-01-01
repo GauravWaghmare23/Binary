@@ -4,17 +4,19 @@ dotenv.config();
 import cors from "cors";
 import { logger } from "./utils/logger.js";
 import { connectDB } from "./lib/connect.js";
+import { clerkMiddleware } from '@clerk/express'
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-
+app.use(clerkMiddleware());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://binary-frontend.onrender.com", // no trailing slash
+      process.env.CLIENT_PRODUCTION_URL,
+      process.env.CLIENT_DEVELOPMENT_URL,
     ],
+    credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
