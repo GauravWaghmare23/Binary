@@ -5,6 +5,8 @@ import cors from "cors";
 import { logger } from "./utils/logger.js";
 import { connectDB } from "./lib/connect.js";
 import { clerkMiddleware } from '@clerk/express'
+import {serve} from "inngest/express";
+import { inngest, functions } from "./lib/inngest.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,19 +26,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: "Hello from the server.",
-  });
-});
 
-app.get("/data", (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: "This is some sample data from the server.",
-  });
-});
+//routes
+app.use("/api/inngest", serve({client:inngest,functions}))
 
 const startServer = async () => {
     try {

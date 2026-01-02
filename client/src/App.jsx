@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
-import axios from "axios";
 import {
   SignedIn,
   SignedOut,
@@ -10,25 +9,11 @@ import {
 } from "@clerk/clerk-react";
 
 function App() {
-  const [data, setData] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(import.meta.env.VITE_BASE_URL + "/data");
-        setData(response.data.data);
-        console.log("Data fetched from server:", response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  
 
   return (
     <div>
       <h1>Welcome to Binary Project</h1>
-      <h2>Data from Server: {data}</h2>
       <SignedOut>
         <SignInButton mode="modal" />
       </SignedOut>

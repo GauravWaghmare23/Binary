@@ -1,7 +1,6 @@
 import { Inngest } from "inngest";
-import { connectDB } from "./connect";
-import User from "../models/user.model";
-import { profile } from "winston";
+import { connectDB } from "./connect.js";
+import User from "../models/user.model.js";
 
 export const inngest = new Inngest({ id: "Binary-app" });
 
@@ -24,4 +23,14 @@ const syncUser = inngest.createFunction(
   }
 );
 
-export { syncUser };
+const deleteUserFromDb = inngest.createFunction(
+  { id: "delete-user-from-db" },
+  { event: "clerk/user.deleted" },
+  async ({ event }) => {
+    await connectDB();
+    const { id } = event.data;
+    await User.deleteOne({ clerkId: id });
+  }
+)
+
+export const functions = [syncUser, deleteUserFromDb];
