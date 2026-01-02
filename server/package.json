@@ -19,6 +19,7 @@
     "inngest": "^3.48.1",
     "mongodb": "^7.0.0",
     "mongoose": "^8.19.1",
+    "stream-chat": "^9.27.2",
     "winston": "^3.19.0"
   },
   "devDependencies": {
