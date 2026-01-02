@@ -28,7 +28,12 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //routes
-app.use("/api/inngest", serve({client:inngest,functions}))
+app.use("/api/inngest", serve({ client: inngest, functions }))
+
+//health check route
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "OK", message: "Server is healthy" });
+});
 
 const startServer = async () => {
     try {
