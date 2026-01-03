@@ -8,6 +8,7 @@ export const logger = winston.createLogger({
     winston.format.simple(),
     winston.format.errors({ stack: true }),
     winston.format.json(),
+    winston.format.prettyPrint()
   ),
   transports: [
     new winston.transports.Console({
