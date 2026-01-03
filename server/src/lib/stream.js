@@ -37,14 +37,13 @@ export const deleteStreamUser = async (userId) => {
         logger.info({
             success: true,
             message: "Stream user deleted successfully",
+            userId: userId, 
+        })
+    } catch {
+        logger.info({
+            success: false,
+            message: "Stream user delete failed",
             userId: userId,
         })
-    } catch (error) {
-        logger.error({
-            success: false,
-            message: "Stream user deletion failed",
-            error: error.message
-        });
-        throw error; 
     }
 }
